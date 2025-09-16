@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  email    String @unique
+  password String
+  name     String
+  createdAt DateTime @default(now())
+  
+  donations Donation[]
+  requests  Request[]
+  
+  @@map("users")
+}
+
+model Book {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  author      String
+  genre       String
+  condition   String
+  description String?
+  createdAt   DateTime @default(now())
+  
+  donations Donation[]
+  requests  Request[]
+  
+  @@map("books")
+}
+
+model Donation {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  status    String @default("Disponível")
+  createdAt DateTime @default(now())
+  
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+  
+  bookId String @db.ObjectId
+  book   Book   @relation(fields: [bookId], references: [id])
+  
+  requests Request[]
+  
+  @@map("donations")
+}
+
+model Request {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  message   String?
+  status    String @default("Pendente")
+  createdAt DateTime @default(now())
+  
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+  
+  bookId String @db.ObjectId
+  book   Book   @relation(fields: [bookId], references: [id])
+  
+  donationId String @db.ObjectId
+  donation   Donation @relation(fields: [donationId], references: [id])
+  
+  @@map("requests")
+}

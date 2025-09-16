@@ -1,19 +1,20 @@
 {
-  "name": "gerenciador-alunos",
+  "name": "sistema-doacoes-livros",
   "version": "1.0.0",
-  "main": "index.js",
-  
+  "description": "Sistema de doações de livros usando Prisma e MongoDB",
+  "main": "script.ts",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "build": "tsc"
+    "dev": "ts-node script.ts",
+    "generate": "prisma generate",
+    "studio": "prisma studio"
   },
   "dependencies": {
-    "inquirer": "^9.2.8",
-    "readline-sync": "^1.4.10"
+    "@prisma/client": "^5.0.0",
+    "prisma": "^5.0.0"
   },
   "devDependencies": {
-    "@types/node": "^24.0.13",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
   }
 }
