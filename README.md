@@ -71,7 +71,7 @@ npm install
 DATABASE_URL="mongodb+srv://davimurta_db_user:m3RRTzUsokb39ZeX@cluster0.qiijqlg.mongodb.net/doacoes_livros?retryWrites=true&w=majority"
 
 # Criar as tabelas/coleções no banco
-npx prisma db push
+npx prisma generate
 
 # Executar o script de demonstração
-npx ts-node script.ts
+npm run dev
